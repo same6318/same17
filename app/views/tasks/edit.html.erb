@@ -3,4 +3,4 @@
 <%= render 'form', task: @task %>
 
 <%= link_to t('common.show'), @task %> |
-<%= link_to t('common.back'), tasks_path %>
+<%= link_to t('common.back'), tasks_path(current_user.id) %>

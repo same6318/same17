@@ -1,0 +1,42 @@
+<h1>アカウント編集ページ</h1>
+<%= form_with(model: @user, local: true) do |f| %>
+    <div class="field">
+      <%= f.label :名前 %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :メールアドレス %>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :パスワード %>
+      <%= f.password_field :password %>
+    </div>
+
+    <div class="field">
+      <%= f.label :パスワード（確認） %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "更新する" %>
+    </div>
+<% end %>
+<%#form_withを使用するにはルーティングにcreateアクションを追加する必要がある%>
+
+<%= link_to "戻る", user_path(current_user.id), id: "back" %>
+
+<% if @user.errors.any? %>
+    <div id="error_explanation"> <%#このdiv id="error_explanation"がRailsがデフォルトで用意しているエラー用のスタイル%>
+        <h2><%= pluralize(@user.errors.count, "error") %> profibited this <%= @user.name %> from being saved:</h2>
+        
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+    </div>
+<% end %>
+<%# エラーメッセージをビューに表示する%>
