@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
   # skip_before_action :login_required, only: [:new, :create] #タスク登録の時にログイン要求は無し。
-  before_action :correct_user, only: [:show, :edit, :update, :destroy] #登録、一覧、編集の時にはログイン状態でなければならない。
+  before_action :correct_user, only: [:new, :create, :show, :edit, :update, :destroy] #登録、一覧、編集の時にはログイン状態でなければならない。
 
   def index
     @tasks = current_user.tasks
@@ -56,12 +56,12 @@ class TasksController < ApplicationController
   end
 
   def correct_user
+    # binding.irb
     @user = Task.find(params[:id])
     @user = @task.user
-    unless current_user?(@user)
-      #binding.irb
-    flash[:notice] = "ログインしてください"
-    end
+    # # unless current_user?(@user)
+    # # flash[:notice] = "ログインしてください"
+    # end
     redirect_to current_user unless current_user?(@user)
     #別のアカウントのアクセス先に入ろうとしたら、リダイレクトさせる。
   end #データベースのユーザーidをcurrent_user?メソッドに引き渡して、アクセス先のidと照合している。  

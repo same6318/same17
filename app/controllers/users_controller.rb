@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     skip_before_action :login_required, only: [:new, :create]#アカウント登録の時にはログイン要求は無し。
-    before_action :correct_user, only: [:show, :edit, :update]
+    before_action :correct_user, only: [:show, :edit, :update, :destroy]
 
     def new
         @user = User.new
