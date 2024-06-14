@@ -10,6 +10,7 @@
   </thead>
 
   <tbody>
+  <% if logged_in? %>
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.title %></td>
@@ -19,6 +20,7 @@
         <td><%= link_to t('common.destroy'), task, method: :delete, data: { confirm: t('common.confirm_destroy') } %></td>
       </tr>
     <% end %>
+  <% end %>
   </tbody>
 </table>
 
