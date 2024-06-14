@@ -56,11 +56,11 @@ class TasksController < ApplicationController
   end
 
   def correct_user
-    # binding.irb
-    @user = Task.find(params[:id])
-    @user = @task.user
-    # # unless current_user?(@user)
-    # # flash[:notice] = "ログインしてください"
+    @user = current_user
+    #binding.irb
+    # @user = @task.user
+    # unless current_user?(@user)
+    # flash[:notice] = "ログインしてください"
     # end
     redirect_to current_user unless current_user?(@user)
     #別のアカウントのアクセス先に入ろうとしたら、リダイレクトさせる。
