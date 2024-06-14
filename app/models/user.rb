@@ -9,4 +9,5 @@ class User < ApplicationRecord
 
     has_secure_password #passwordとpassword_confirmationの仮想カラムが使える。
     validates :password, presence: true, length: { minimum: 6, message: 'は6文字以上で入力してください'}
+    #日本語化の部分でblankのところが
 end

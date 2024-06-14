@@ -11,7 +11,7 @@ class UsersController < ApplicationController
         if @user.save
             log_in(@user) #アカウント登録と同時にログイン
             flash[:notice] = "アカウントを登録しました"
-            redirect_to tasks_path(@user.id)
+            redirect_to tasks_path
         else
             render :new
         end
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         if @user.update(user_params)
             log_in(@user)
             flash[:notice] = "アカウントを更新しました"
-            redirect_to user_path(@user.id)
+            redirect_to user_path
         else
             render :edit
         end
@@ -41,7 +41,10 @@ class UsersController < ApplicationController
 
     def correct_user
         @user = User.find(params[:id])
+        unless current_user?(@user)
+            #binding.irb
         flash[:notice] = "ログインしてください"
+        end
         redirect_to current_user unless current_user?(@user)
     end #データベースのユーザーidをcurrent_user?メソッドに引き渡して、アクセス先のidと照合している。
 
