@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     def edit
     end
 
+
     def update
         if @user.update(user_params)
             log_in(@user)
@@ -31,6 +32,12 @@ class UsersController < ApplicationController
         else
             render :edit
         end
+    end
+
+    def destroy
+        #binding.irb
+        @user.destroy
+        redirect_to new_session_path
     end
 
     private
